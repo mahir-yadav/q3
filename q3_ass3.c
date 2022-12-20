@@ -5,8 +5,8 @@
 #include <linux/pid.h>
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("John Doe");
-MODULE_DESCRIPTION("A kernel module that prints information about a process");
+MODULE_AUTHOR("mahir");
+MODULE_DESCRIPTION("OS assignment 3");
 MODULE_VERSION("1.0");
 
 static int pid = 1;
@@ -32,9 +32,7 @@ static int __init process_info_init(void)
     printk(KERN_INFO "Process Information:\n");
     printk(KERN_INFO "PID: %d\n", task->pid);
     printk(KERN_INFO "Name: %s\n", task->comm);
-    printk(KERN_INFO "State: %ld\n", task->state);
     printk(KERN_INFO "Priority: %d\n", task->prio);
-    printk(KERN_INFO "RT Priority: %d\n", task->rt_priority);
     printk(KERN_INFO "Static Priority: %d\n", task->static_prio);
 
     return 0;

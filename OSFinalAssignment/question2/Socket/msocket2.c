@@ -7,6 +7,8 @@
 
 #define SOCKET_NAME "mahir.socket"
 #define BUFFER_SIZE 12
+#define BILLION 1000000000L
+
 void getValue()
 {
 	int c;
@@ -40,6 +42,9 @@ int main(int argc, char *argv[])
 		b--;
 	}
 	getValue();
+	long long int diff;
+	struct timespec start, end;
+	clock_gettime(CLOCK_MONOTONIC, &start);
 	while (1)
 	{
 		d_s = accept(cs, NULL, NULL);
@@ -104,6 +109,9 @@ int main(int argc, char *argv[])
 			exit(EXIT_FAILURE);
 		}
 	}
+	clock_gettime(CLOCK_MONOTONIC, &end);
+	diff = BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
+	printf("\nTime for completion in FIFO %llu nanoseconds\n", (long long unsigned int)diff);
 
 	return 0;
 }

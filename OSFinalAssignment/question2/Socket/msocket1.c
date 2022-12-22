@@ -8,6 +8,8 @@
 
 #define SOCKET_NAME "mahir.socket"
 #define BUFFER_SIZE 10
+#define BILLION 1000000000L
+
 void getRandStr(char randstrs[][12])
 {
 	srand(time(NULL));
@@ -54,7 +56,9 @@ int main(int argc, char *argv[])
 	getValue();
 	getRandStr(randStr);
 	int b = 10;
-
+	long long int diff;
+	struct timespec start, end;
+	clock_gettime(CLOCK_MONOTONIC, &start);
 	for (int i = 1; i <= 50; i++)
 	{
 		b++;
@@ -113,4 +117,7 @@ int main(int argc, char *argv[])
 			}
 		}
 	}
+	clock_gettime(CLOCK_MONOTONIC, &end);
+	diff = BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
+	printf("\nTime for completion in FIFO %llu nanoseconds\n", (long long unsigned int)diff);
 }
